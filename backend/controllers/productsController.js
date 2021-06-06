@@ -20,6 +20,6 @@ module.exports.products_get = (req, res) => {
       }
     });
   } catch (error) {
-    res.status(403).send(error)
+    res.status(403).send(error.message)
   }
 };

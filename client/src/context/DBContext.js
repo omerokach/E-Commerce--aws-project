@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import firebase from "firebase";
 import "firebase/firestore";
 import "firebase/storage";
@@ -14,9 +14,10 @@ const db = app.firestore();
 
 export function DataBaseProvider({ children }) {
   const usersRef = db.collection("users");
+  const [basket, setBasket] = useState([]) 
 
   const getUserFromStore = async (userEmail) => {
-    const res = await usersRef.where("email", "==", userEmail).get();
+    const res = await usersRef.where("email_adress", "==", userEmail).get();
     return res;
   };
 
@@ -29,6 +30,8 @@ export function DataBaseProvider({ children }) {
   const value = {
     signupUserOnStore,
     getUserFromStore,
+    setBasket,
+    basket
   };
 
   return (
